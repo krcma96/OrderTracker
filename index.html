@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <script src="orderTracker.js"></script>
+    </head>
+    
+    <body>
+        <h1> Order tracker </h1>
+
+        <h3>Add new user</h3>
+        <div>
+            <span> Name <input id="newUserNameInput"></span>
+            <button onclick="AddNewUser(getElementById('newUserNameInput').value)">Add user</button>
+        </div>
+
+        
+        <h3>Add new item</h3>
+        <div>
+            Name <input id="newItemNameInput"> <br><br>
+            Price <input id="newItemPriceInput"> <br><br>
+            <button onclick="AddNewItem(getElementById('newItemNameInput').value, getElementById('newItemPriceInput').value)">Add item</button>
+        </div>
+
+        <h3> Items </h3>
+        <fieldset id="itemsDiv" style="width:300px;">
+        </fieldset>
+
+
+        <h3> Users </h3>
+        <div id="usersDiv">
+            
+        </div>
+
+        <br><br><br><button onclick="Reset()">Reset all</button>
+    </body>
+
+</html>
