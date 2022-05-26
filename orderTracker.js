@@ -67,6 +67,10 @@ function AddNewItem(name, price)
         let newItem = new Item(name, price);
         data.availableItems.push(newItem);
     }
+    else
+    {
+        RefreshStatisticsUI();
+    }
 
     RefreshItemsUI();
     SaveToLocalStorage();
@@ -131,6 +135,11 @@ function AddItemSelectUI(item)
     inputElem.type = "radio";
     inputElem.name = "selectedItem";
     inputElem.value = item.name;
+    inputElem.onclick = function()
+    {
+        document.getElementById('newItemNameInput').value = item.name;
+        document.getElementById('newItemPriceInput').value = item.price;
+    }
     
     const textElem = document.createTextNode(item.name + "  " + item.price + " RSD");
 
