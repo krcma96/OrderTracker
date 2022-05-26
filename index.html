@@ -3,6 +3,13 @@
 
     <head>
         <script src="orderTracker.js"></script>
+
+        <style>
+            table, th, td {
+              border:1px solid black;
+              padding: 5px;
+            }
+        </style>
     </head>
     
     <body>
@@ -28,9 +35,24 @@
 
 
         <h3> Users </h3>
-        <div id="usersDiv">
+        <input type="checkbox" id="selectAll" onclick="SelectAllUsers()"> Select all <br>
+        <table id="usersDiv">
             
+        </table>
+
+        <h3> Order history </h3>
+        <table id="orderHistoryDiv">
+        </table>
+        <button onclick="AddRoundFromSelected();">Add round</button>
+
+        <h3> Summary </h3>
+        <div id="summaryByItem">
         </div>
+
+        <h3> Summary by user </h3>
+        <div id="summaryByUser">
+        </div>
+        
 
         <br><br><br><button onclick="Reset()">Reset all</button>
     </body>
