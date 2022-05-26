@@ -132,9 +132,20 @@ function AddItemSelectUI(item)
     const newDiv = document.createElement("div");
 
     const inputElem = document.createElement("input");
+    inputElem.setAttribute("class", "form-check-input");
     inputElem.type = "radio";
     inputElem.name = "selectedItem";
+    inputElem.id = item.name+"_radio";
     inputElem.value = item.name;
+
+    let labelElem = document.createElement("label");
+    labelElem.setAttribute("class", "form-check-label");
+    labelElem.setAttribute("for", item.name+"_radio");
+    labelElem.innerText = item.name;
+
+    let spanElem = document.createElement("span");
+    spanElem.innerText = " ";
+
     inputElem.onclick = function()
     {
         document.getElementById('newItemNameInput').value = item.name;
@@ -144,7 +155,8 @@ function AddItemSelectUI(item)
     const textElem = document.createTextNode(item.name + "  " + item.price + " RSD");
 
     newDiv.appendChild(inputElem);
-    newDiv.appendChild(textElem);
+    newDiv.appendChild(spanElem);
+    newDiv.appendChild(labelElem);
 
     document.getElementById("itemsDiv").appendChild(newDiv);
 }
@@ -159,16 +171,26 @@ function RefreshUsersSelectUI()
 function AddUsersSelectUI(user)
 {
     const newDiv = document.createElement("div");
+    newDiv.classList.add("form-check");
 
     const inputElem = document.createElement("input");
+    inputElem.setAttribute("class", "form-check-input");
     inputElem.type = "checkbox";
     inputElem.name = "selectedUsers";
+    inputElem.id = user.name+"_checkbox";
     inputElem.value = user.name;
-    
-    const textElem = document.createTextNode(user.name);
+
+    let labelElem = document.createElement("label");
+    labelElem.setAttribute("class", "form-check-label");
+    labelElem.setAttribute("for", user.name+"_checkbox");
+    labelElem.innerText = user.name;
+
+    let spanElem = document.createElement("span");
+    spanElem.innerText = " ";
 
     newDiv.appendChild(inputElem);
-    newDiv.appendChild(textElem);
+    newDiv.appendChild(spanElem);
+    newDiv.appendChild(labelElem);
 
     document.getElementById("usersDiv").appendChild(newDiv);
 }
@@ -304,6 +326,7 @@ function AddSummaryByItemUI(itemName, number, price, totalCost)
 function CreateTableSummaryByItem(dict)
 {
     let table = document.createElement("table");
+    table.setAttribute("class", "table table-striped table-hover");
     table.appendChild(CreateRow(["Item", "Number", "Price", "Total"]));
     let total = 0;
 
