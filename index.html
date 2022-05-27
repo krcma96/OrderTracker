@@ -10,11 +10,33 @@
             }
 
             .float-child {
-                width: 20%;
+                width: 50%;
                 float: left;
                 padding: 10px;
-                border: 2px solid rgb(124, 124, 124);
             } 
+
+            .section {
+                width: 500px;
+                margin-top: 10px;
+                padding : 5px;
+                border: 2px solid rgb(124, 124, 124);
+                border-radius: 15px!important;
+            }
+
+            .sub_section {
+                width: auto;
+                border: 2px solid rgb(193, 210, 214);
+            }
+
+            .clearfix {
+                overflow: auto;
+            }
+            .clearfix::after {
+                content: "";
+                clear: both;
+                display: table;
+            }
+
         </style>
 
         <script
@@ -40,21 +62,24 @@
         <div class="container">
             <h1> Order tracker </h1>
 
-            <h3>Add new user</h3>
-            <div>
-                <span> Name <input id="newUserNameInput"></span>
-                <button class="btn btn-primary" onclick="AddNewUser(getElementById('newUserNameInput').value)">Add user</button>
-            </div>
+            <div class="section">
 
+                <h3>Add new user</h3>
+                <div>
+                    <span> Name <input id="newUserNameInput"></span>
+                    <button class="btn btn-primary" onclick="AddNewUser(getElementById('newUserNameInput').value)">Add user</button>
+                </div>
+                
+                
+                <h3>Add new item</h3>
+                <div>
+                    Name <input id="newItemNameInput"> <br><br>
+                    Price <input id="newItemPriceInput" type="number"> <br><br>
+                    <button class="btn btn-primary" onclick="AddNewItem(getElementById('newItemNameInput').value, getElementById('newItemPriceInput').value)">Add item</button>
+                </div>
+            </div>
             
-            <h3>Add new item</h3>
-            <div>
-                Name <input id="newItemNameInput"> <br><br>
-                Price <input id="newItemPriceInput" type="number"> <br><br>
-                <button class="btn btn-primary" onclick="AddNewItem(getElementById('newItemNameInput').value, getElementById('newItemPriceInput').value)">Add item</button>
-            </div>
-
-            <div class="float-container">
+            <div class="clearfix float-container section">
 
                 <div class="float-child">
                     <h3> Items </h3>
@@ -75,21 +100,26 @@
                     <div class="form-check" id="usersDiv">
                     </div>
                 </div>   
-            </div>
-            <div style="clear:both"></div>
-            <br>
-            <button class="btn btn-primary" onclick="AddRoundFromSelected();">Add round</button>
-
-            <h3> Order history </h3>
-            <table class="table" id="orderHistoryDiv">
-            </table>
-
-            <h3> Summary </h3>
-            <div id="summaryByItem">
+                <div style="clear:both"></div>
+                <button class="btn btn-primary" onclick="AddRoundFromSelected();">Add round</button>
             </div>
 
-            <h3> Summary by user </h3>
-            <div id="summaryByUser">
+            <div class="section rounded">    
+                <h2> Order history </h2>
+                <table class="table" id="orderHistoryDiv">
+                </table>
+            </div>
+
+            <div class="section">
+                <h2> Summary </h2>
+                <div id="summaryByItem">
+                </div>
+            </div>
+
+            <div class="section">
+                <h2> Summary by user </h2>
+                <div id="summaryByUser">
+                </div>
             </div>
             
 

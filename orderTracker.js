@@ -291,17 +291,23 @@ function RefreshOrderHistoryUI()
 
     let orderHistoryTable = document.getElementById("orderHistoryDiv");
     let theadElem = document.createElement("thead");
-    theadElem.appendChild(CreateRow(["Item","Number", "Users ordered", "Time"]));
+    theadElem.appendChild(CreateRow(["Item","N", "Users ordered", "Time"]));
     
     let tbodyElem = document.createElement("tbody");
     for (order of data.orderHistory)
     {
+        let userNamesListString = order.userNamesList.toString();
+        let maxLen = 42;
+        if (userNamesListString.length > maxLen)
+        {
+            userNamesListString = userNamesListString.substring(0, maxLen) + "\n" +userNamesListString.substring(maxLen);
+        }
         tbodyElem.appendChild(
             CreateRow(
             [
                 order.itemName,
                 order.userNamesList.length,
-                order.userNamesList,
+                userNamesListString,
                 (new Date(order.purchaseTime)).toLocaleTimeString()
             ]
             ))
@@ -350,7 +356,7 @@ function CreateTableSummaryByItem(dict)
 
     let totalRow = CreateRow(["", "", ""]);
     let lastColumn = CreateColumn(total +" RSD");
-    lastColumn.style = "border:5px solid black !important;";
+    lastColumn.style = "border:3px solid black !important; ";
     totalRow.appendChild(lastColumn);
 
     tbodyElem.appendChild(totalRow);
@@ -384,7 +390,7 @@ function RefreshSummaryByItemUI()
 
 function CreateParagraph(text)
 {
-    let paragraph = document.createElement("p");
+    let paragraph = document.createElement("h3");
     paragraph.innerText = text;
     return paragraph;
 }
@@ -396,9 +402,13 @@ function RefreshSummaryByUsersUI()
 
     for (user of data.users)
     {
-        div.appendChild(CreateParagraph(user.name));
+        let newDiv = document.createElement("div");
+        newDiv.setAttribute("class", "section sub_section");
 
-        div.appendChild(CreateTableSummaryByItem(user.orderHistory));
+        newDiv.appendChild(CreateParagraph(user.name));
+
+        newDiv.appendChild(CreateTableSummaryByItem(user.orderHistory));
+        div.appendChild(newDiv);
     }
 }
 
