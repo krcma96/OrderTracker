@@ -4,10 +4,17 @@
         <meta name="viewport" content="width=1280, initial-scale=1">
         
         <style>
-            table, th, td {
-                border:1px solid black;
-                padding: 5px;
+            .float-container {
+                border: 3px solid #fff;
+                padding: 0px;
             }
+
+            .float-child {
+                width: 20%;
+                float: left;
+                padding: 10px;
+                border: 2px solid rgb(124, 124, 124);
+            } 
         </style>
 
         <script
@@ -22,7 +29,7 @@
 
         <script src="orderTracker.js"></script>
         <script>
-            var siteWidth = 600;
+            var siteWidth = 500;
             var scale = screen.width /siteWidth;
 
             document.querySelector('meta[name="viewport"]').setAttribute('content', 'width='+siteWidth+', initial-scale='+scale+'');
@@ -47,28 +54,35 @@
                 <button class="btn btn-primary" onclick="AddNewItem(getElementById('newItemNameInput').value, getElementById('newItemPriceInput').value)">Add item</button>
             </div>
 
-            <h3> Items </h3>
-            <fieldset id="itemsDiv" style="width:300px;">
-            </fieldset>
+            <div class="float-container">
 
-
-            <h3> Users </h3>
-
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" id="selectAll" onclick="SelectAllUsers()">
-                <label class="form-check-label" for="selectAll">
-                    Select all
-                </label>
-            </div>
-
-            <div class="form-check" id="usersDiv">
+                <div class="float-child">
+                    <h3> Items </h3>
+                    <fieldset id="itemsDiv" style="width:300px;">
+                    </fieldset>
+                </div>
                 
+                
+                <div class="float-child">
+                    <h3> Users </h3>
+                        
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="selectAll" onclick="SelectAllUsers()">
+                        <label class="form-check-label" for="selectAll">
+                            Select all
+                        </label>
+                    </div>
+                    <div class="form-check" id="usersDiv">
+                    </div>
+                </div>   
             </div>
+            <div style="clear:both"></div>
+            <br>
+            <button class="btn btn-primary" onclick="AddRoundFromSelected();">Add round</button>
 
             <h3> Order history </h3>
             <table class="table" id="orderHistoryDiv">
             </table>
-            <button class="btn btn-primary" onclick="AddRoundFromSelected();">Add round</button>
 
             <h3> Summary </h3>
             <div id="summaryByItem">

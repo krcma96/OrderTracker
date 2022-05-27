@@ -290,11 +290,13 @@ function RefreshOrderHistoryUI()
     RemoveAllChildren(document.getElementById("orderHistoryDiv"));
 
     let orderHistoryTable = document.getElementById("orderHistoryDiv");
-    orderHistoryTable.appendChild(CreateRow(["Item","Number", "Users ordered", "Time"]));
-
+    let theadElem = document.createElement("thead");
+    theadElem.appendChild(CreateRow(["Item","Number", "Users ordered", "Time"]));
+    
+    let tbodyElem = document.createElement("tbody");
     for (order of data.orderHistory)
     {
-        orderHistoryTable.appendChild(
+        tbodyElem.appendChild(
             CreateRow(
             [
                 order.itemName,
@@ -304,12 +306,16 @@ function RefreshOrderHistoryUI()
             ]
             ))
     }
+
+    orderHistoryTable.appendChild(theadElem);
+    orderHistoryTable.appendChild(tbodyElem);
 }
 
 function CreateColumn(text)
 {
     let column = document.createElement("th");
     column.innerText = text;
+    column.setAttribute("scope", "col");
     return column;
 }
 
@@ -327,7 +333,9 @@ function CreateTableSummaryByItem(dict)
 {
     let table = document.createElement("table");
     table.setAttribute("class", "table table-striped table-hover");
-    table.appendChild(CreateRow(["Item", "Number", "Price", "Total"]));
+    let theadElem = document.createElement("thead");
+    theadElem.appendChild(CreateRow(["Item", "Number", "Price", "Total"]));
+    let tbodyElem = document.createElement("tbody");
     let total = 0;
 
     for (const [key, value] of Object.entries(dict)) {
@@ -336,7 +344,7 @@ function CreateTableSummaryByItem(dict)
         let price = GetItemByName(itemName).price;
         let totalByItem = (number*price);
 
-        table.appendChild(CreateRow([itemName, number, price+" RSD", totalByItem+" RSD"]));
+        tbodyElem.appendChild(CreateRow([itemName, number, price+" RSD", totalByItem+" RSD"]));
         total += totalByItem;
     }
 
@@ -345,8 +353,10 @@ function CreateTableSummaryByItem(dict)
     lastColumn.style = "border:5px solid black !important;";
     totalRow.appendChild(lastColumn);
 
-    table.appendChild(totalRow);
+    tbodyElem.appendChild(totalRow);
 
+    table.appendChild(theadElem);
+    table.appendChild(tbodyElem);
     return table;
 }
 
